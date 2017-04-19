@@ -2,11 +2,11 @@
 //function to validate the email address
 function checkEmail($email){
 
-	if(eregi("^[a-zA-Z0-9_]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$]", $email)){
+	if(preg_match("/^[a-zA-Z0-9_]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$]/", $email)){
 		return FALSE;
 	}
 
-	list($Username, $Domain) = split("@",$email);
+	list($Username, $Domain) = explode("@",$email);
 
 	if(@getmxrr($Domain, $MXHost)){
 		return TRUE;
@@ -54,6 +54,8 @@ if(empty($_POST['name'])){
 	$response_array['name'] = $_POST['name'];
 	$response_array['email'] = $_POST['email'];
 	$response_array['message'] = $_POST['message'];
+
+
 
 }
 

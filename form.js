@@ -9,13 +9,19 @@ $(document).ready(function () {
             dataType: "json",
 
             success: function (msg) {
+                $("#formResponse").removeClass('error');
                 $("#formResponse").addClass(msg.status);
-                $("#formResponse").html('Email Sent');
+                if (msg.status) {
+                    $("#formResponse").html(msg.message);
+                } else {
+                    $("#formResponse").html("Email sent!");
+                }
 
             },
             error: function () {
-                $("#formResponse").html("There was an error submitting the form. Please try again.");
-            }
+                $("#formResponse").removeClass('success');
+                $("#formResponse").addClass('error');
+                $("#formResponse").html("There was an error submitting the form. Please try again.");            }
         });
 
         return false;
